@@ -98,6 +98,59 @@
     margin: -20px;
 }
 
+.app__store {
+    position: relative;
+    margin: 20px;
+    display:flex;
+    justify-content:center;
+    direction:columns;
+    flex-flow:wrap;
+}
+.app__store__title{
+    width:100%;
+}
+.app__store__left {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 20px;
+    margin: -20px;
+}
+
+.app__store__right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 20px;
+    margin: -20px;
+}
+
+.product{
+    border:solid;
+    width:200px;
+    height:200px;
+}
+
+.product > img{
+    border: solid;
+    width: 100px;
+    height: 100px;
+    margin:5px;
+}
+
+.product > h3, h4 {
+    margin: 5px;
+    font-family: 'Bubbler One', sans-serif;
+    font-weight:bold;
+}
+.product > button {
+    width:50%;
+    border:solid;
+}
+
+
 .app__container--round {
     position:relative;
 }

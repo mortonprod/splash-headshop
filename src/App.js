@@ -24,6 +24,7 @@ import head from './assets/head.svg';
 import box from './assets/box.svg';
 import arrow from './assets/arrow.svg';
 import aboutUs from './assets/aboutUs.svg';
+import storeSvg from './assets/store.svg';
 
 import lines from './assets/lines.svg';
 import menu from './assets/menu.svg';
@@ -114,12 +115,49 @@ class App extends Component {
         </div>
     )
     }
+    const store = () => {
+        return (
+        <div className="app__store">
+            <object ref={() => {
+                createOnce("store","500","autostart",storeSvg)                      
+            }} className="app__store__title" id="store"></object>
+             
+                <Product 
+                 src={box}
+                 name={"Box"}
+                 description={"A box what else can I say"}
+                 price={5}>
+                </Product>
+                <Product 
+                 src={arrow}
+                 name={"Arrow"}
+                 description={"A arrow what else can I say"}
+                 price={5}>
+                </Product>
+                <Product 
+                 src={head}
+                 name={"Head"}
+                 description={"A head what else can I say"}
+                 price={10}>
+                </Product>
+             
+            <object ref={() => {
+                createOnce("leftStore","1000","autostart",lines)                      
+            }} className="app__store__left" id="leftStore"></object>
+            <object ref={() => {
+                createOnce("rightStore","1000","autostart",lines)                      
+            }} className="app__store__right" id="rightStore"></object>
+        </div>
+        )
+    }
     let moveIn = ""
     if(this.state.isMenu){
         moveIn = "nav--moveIn"
     }
     let nav = (
-        <div className={"nav " + moveIn}>
+        <div onClick ={()=>{
+            this.setState({isMenu:false});
+        }} className={"nav " + moveIn}>
         <div>
           <h2> What you'll find here </h2>
 	      <ul>
@@ -158,6 +196,7 @@ class App extends Component {
         <div className="app">
             <Route exact path="/" component={comp}/>
             <Route path="/about" component={info}/>
+            <Route path="/store" component={store}/>
             <img onClick= { () =>{
                 let menu = true;
                 if(this.state.isMenu){
@@ -217,4 +256,22 @@ class BoxTL extends Component {
     );
   }
 }
+
+class Product extends Component {
+  componentDidMount(){
+  }
+  render() {
+    return (
+        <div className="product">
+            <img src={this.props.src} className="product__image" alt="logo" />
+            <h3>{this.props.name}</h3>
+            <h4>{this.props.description}</h4>
+            <button className={"product__button"}> <span>£ {this.props.price} </span> </button>
+        </div>
+    )
+        
+  }
+}
+
+
 
