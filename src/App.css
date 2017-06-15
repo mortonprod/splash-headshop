@@ -338,3 +338,29 @@ img.nav__social--white {
     opacity: 1;
     transition: opacity 1s;
 }
+
+.chose {
+    width: 100vw;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    direction:vertical;
+}
+
+.chose__svg{
+    margin:10px;
+}
+
+@media screen and (orientation:portrait) {
+    .chose__svg {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media screen and (orientation:landscape) {
+    .chose__svg {
+        width: auto;
+        height: 100%;
+    }
+}

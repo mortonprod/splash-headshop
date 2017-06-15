@@ -39,6 +39,8 @@ import twitterW from './assets/Twitter_White.svg';
 import what from './assets/what.svg';
 import whatElse from './assets/else.svg';
 
+import chose from './assets/chose.svg';
+
 
 import './App.css';
 
@@ -191,10 +193,20 @@ class App extends Component {
           </div>
           </div>
     )
+    const choseComp = () => {
+        return (
+	        <div className="chose">
+	            <object ref={() => {
+	                createOnce("chose","500","autostart",chose)                      
+	            }} className="chose_svg" id="chose"></object>
+	        </div>
+        )
+    }
     return (
      <Router>
         <div className="app">
-            <Route exact path="/" component={comp}/>
+            <Route exact path="/" component={choseComp}/>
+            <Route exact path="/Home" component={comp}/>
             <Route path="/about" component={info}/>
             <Route path="/store" component={store}/>
             <img onClick= { () =>{
