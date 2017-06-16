@@ -9,7 +9,6 @@ let isMounted = false;
 export default class Chose extends Component {
     constructor(){
         super();
-        this.state = {isDynamic:true}
     }
     componentDidMount(){
         isMounted = true;

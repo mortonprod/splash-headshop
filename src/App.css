@@ -98,57 +98,6 @@
     margin: -20px;
 }
 
-.app__store {
-    position: relative;
-    margin: 20px;
-    display:flex;
-    justify-content:center;
-    direction:columns;
-    flex-flow:wrap;
-}
-.app__store__title{
-    width:100%;
-}
-.app__store__left {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 20px;
-    margin: -20px;
-}
-
-.app__store__right {
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 100%;
-    width: 20px;
-    margin: -20px;
-}
-
-.product{
-    border:solid;
-    width:200px;
-    height:200px;
-}
-
-.product > img{
-    border: solid;
-    width: 100px;
-    height: 100px;
-    margin:5px;
-}
-
-.product > h3, h4 {
-    margin: 5px;
-    font-family: 'Bubbler One', sans-serif;
-    font-weight:bold;
-}
-.product > button {
-    width:50%;
-    border:solid;
-}
 
 
 .app__container--round {
@@ -339,28 +288,23 @@ img.nav__social--white {
     transition: opacity 1s;
 }
 
-.chose {
-    width: 100vw;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    direction:vertical;
+
+
+
+.fade-enter {
+    opacity: 0.01;
 }
 
-.chose__svg{
-    margin:10px;
+.fade-enter.fade-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
 }
 
-@media screen and (orientation:portrait) {
-    .chose__svg {
-        width: 100%;
-        height: auto;
-    }
+.fade-leave {
+    opacity: 1;
 }
 
-@media screen and (orientation:landscape) {
-    .chose__svg {
-        width: auto;
-        height: 100%;
-    }
+.fade-leave.fade-leave-active {
+    opacity: 0.01;
+    transition: opacity 500ms ease-in;
 }

@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,
+  Switch
 } from 'react-router-dom'
+
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; 
 
 import Vivus from 'vivus';
 import redEye from './assets/red_eye.svg';
@@ -24,7 +27,6 @@ import head from './assets/head.svg';
 import box from './assets/box.svg';
 import arrow from './assets/arrow.svg';
 import aboutUs from './assets/aboutUs.svg';
-import storeSvg from './assets/store.svg';
 
 import lines from './assets/lines.svg';
 import menu from './assets/menu.svg';
@@ -39,26 +41,18 @@ import twitterW from './assets/Twitter_White.svg';
 import what from './assets/what.svg';
 import whatElse from './assets/else.svg';
 
-import chose from './assets/chose.svg';
+import Chose from "./chose"
+
+import Store from "./store";
+
+import createOnce from "./createvivus.js";
+
 
 
 import './App.css';
 
 let infoContent = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,"
 
-let nameStore = []
-let animStore = []
-function createOnce(name,duration,start,file){///Only run each animation once!
-    console.log(nameStore.includes(name));
-    if(!nameStore.includes(name)){
-        let vi = new Vivus(name, {duration:duration, start:start, file:file});
-       // vi.play();
-        nameStore.push(name);
-        animStore[name] = vi 
-    }else{ 
-        let st = new Vivus(name, {duration:1, file:file}).finish();
-    }
-}
 
 
 class App extends Component {
@@ -117,41 +111,6 @@ class App extends Component {
         </div>
     )
     }
-    const store = () => {
-        return (
-        <div className="app__store">
-            <object ref={() => {
-                createOnce("store","500","autostart",storeSvg)                      
-            }} className="app__store__title" id="store"></object>
-             
-                <Product 
-                 src={box}
-                 name={"Box"}
-                 description={"A box what else can I say"}
-                 price={5}>
-                </Product>
-                <Product 
-                 src={arrow}
-                 name={"Arrow"}
-                 description={"A arrow what else can I say"}
-                 price={5}>
-                </Product>
-                <Product 
-                 src={head}
-                 name={"Head"}
-                 description={"A head what else can I say"}
-                 price={10}>
-                </Product>
-             
-            <object ref={() => {
-                createOnce("leftStore","1000","autostart",lines)                      
-            }} className="app__store__left" id="leftStore"></object>
-            <object ref={() => {
-                createOnce("rightStore","1000","autostart",lines)                      
-            }} className="app__store__right" id="rightStore"></object>
-        </div>
-        )
-    }
     let moveIn = ""
     if(this.state.isMenu){
         moveIn = "nav--moveIn"
@@ -193,31 +152,30 @@ class App extends Component {
           </div>
           </div>
     )
-    const choseComp = () => {
-        return (
-	        <div className="chose">
-	            <object ref={() => {
-	                createOnce("chose","500","autostart",chose)                      
-	            }} className="chose_svg" id="chose"></object>
-	        </div>
-        )
-    }
     return (
+
      <Router>
         <div className="app">
-            <Route exact path="/" component={choseComp}/>
-            <Route exact path="/Home" component={comp}/>
-            <Route path="/about" component={info}/>
-            <Route path="/store" component={store}/>
-            <img onClick= { () =>{
+	    <Fade>
+	        <Switch>
+	            <Route exact path="/" component={Chose}/>
+	            <Route exact path="/Home" component={comp}/>
+	            <Route path="/about" component={info}/>
+	            <Route path="/store" component={Store}/>
+	            <Route path="/boutique" component={Store}/>
+	        </Switch>
+	    </Fade>
+        <img 
+            onClick= { () =>{
                 let menu = true;
                 if(this.state.isMenu){
                     menu = false;
                 }
-
                 this.setState({isMenu:menu})
-            }} src={menu} className="app__nav" alt="logo" />
-            {nav}
+            }} 
+            src={menu} className="app__nav" alt="logo" 
+        />
+        {nav}
         </div>
       </Router>
 
@@ -268,22 +226,19 @@ class BoxTL extends Component {
     );
   }
 }
+class Fade extends Component {
 
-class Product extends Component {
-  componentDidMount(){
-  }
-  render() {
-    return (
-        <div className="product">
-            <img src={this.props.src} className="product__image" alt="logo" />
-            <h3>{this.props.name}</h3>
-            <h4>{this.props.description}</h4>
-            <button className={"product__button"}> <span>£ {this.props.price} </span> </button>
-        </div>
-    )
-        
-  }
+    render() {
+        return (
+            <Route render={({location}) => (
+                <ReactCSSTransitionGroup
+                    transitionName="fade"
+                    transitionEnterTimeout={1000}
+                    transitionLeaveTimeout={1000}
+                >
+                    {React.cloneElement(this.props.children, {location: location, key: location.key})}
+                </ReactCSSTransitionGroup>
+            )}/>
+        );
+    }
 }
-
-
-

@@ -1,0 +1,101 @@
+﻿.products__title {
+    width: 100vw;
+    height: 50vh;
+}
+
+.products__box {
+    text-align: center;
+}
+
+.products__box__list {
+    display: flex;
+    justify-content: center;
+    direction: columns;
+    overflow:hidden;
+}
+
+.product {
+    border: solid;
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+}
+
+.product > img {
+    border: solid;
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+}
+
+.product > h3, h4 {
+    margin: 5px;
+    font-family: 'Bubbler One', sans-serif;
+    font-weight: bold;
+}
+
+.product > button {
+    width: 50%;
+    border: solid;
+}
+/* Move Left*/
+.moveLeft-enter {
+    transform:translateX(1500px);
+}
+
+.moveLeft-enter.moveLeft-enter-active {
+    transform: translateX(0px); 
+    transition: all 500ms ease-in;
+}
+
+.moveLeft-leave {
+    transform: translateX(0px);
+    transition: all 500ms ease-in;
+}
+
+.moveLeft-leave.moveLeft-leave-active {
+    transform: translateX(-1500px);
+    transition: all 500ms ease-in;
+}
+
+/* Move Right*/
+.moveRight-enter {
+    transform: translateX(-1500px);
+}
+
+.moveRight-enter.moveRight-enter-active {
+    transform: translateX(0px);
+    transition: all 500ms ease-in;
+}
+
+.moveRight-leave {
+    transform: translateX(0px);
+    transition: all 500ms ease-in;
+}
+
+.moveRight-leave.moveRight-leave-active {
+    transform: translateX(1500px);
+    transition: all 500ms ease-in;
+}
+
+
+/* Move Up*/
+.moveUp-enter {
+    transform:scale(0);
+}
+
+.moveUp-enter.moveUp-enter-active {
+    transform: scale(1);
+    transition: all 500ms ease-in;
+}
+
+.moveUp-leave {
+    transform: scale(1);
+    transition: all 500ms ease-in;
+}
+
+.moveUp-leave.moveUp-leave-active {
+    transform: scale(0);
+    transition: all 500ms ease-in;
+}
+

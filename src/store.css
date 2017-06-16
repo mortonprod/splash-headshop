@@ -1,0 +1,20 @@
+﻿.store {
+    position: relative;
+    margin: 20px;
+}
+
+.store__title {
+    width: 100vw;
+    height:50vh;
+}
+
+.store__offers{
+    text-align:center;
+}
+
+.store__offers__list {
+    display: flex;
+    justify-content: center;
+    direction: columns;
+    flex-flow: wrap;
+}
