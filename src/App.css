@@ -18,7 +18,7 @@ body{
 }
 
 .app__nav__box {
-    position: absolute;
+    position: fixed;
     width: 100vw;
     top: 0px;
     left: 0px;
@@ -47,35 +47,47 @@ body{
     margin-left: 50px;
     margin-right: 50px;
     display: inline;
+
 }
-.app__nav__box__links {
-    margin:auto;
-    margin-left:0;
-    padding:0;
-    color:white;
-    
+
+.app__nav__box__links{
+    display:flex;
+    width:100%;
+    flex-direction:row;
+    flex-wrap:wrap;
+}
+
+.app__nav__box__links > ul{
+    margin-left:10%;
+}
+.app__nav__box__links__routes {
+    margin: auto;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+    color: white;
 }
 .app__nav__box  a {
     width: 40px;
     color: white;
 }
-.app__nav__box__links > li {
+.app__nav__box__links__routes > li {
     width:50px;
     margin: 10px;
     display: inline;
     content: '\25BA';
 }
 
-.app__nav__box__social img {
+.app__nav__box__links__social img {
     width: 40px;
 }
-.app__nav__box__social > li {
+.app__nav__box__links__social > li {
     margin: 10px;
     display: inline;
     content: '\25BA';
 }
 
-.app__nav__box__links > li:before {
+.app__nav__box__links__routes > li:before {
     content: '\25BA';
 }
 
@@ -85,7 +97,6 @@ body{
         display:none;
     }*/
     .app__nav__box {
-        position: absolute;
         width: 100vw;
         top: 0px;
         left: 0px;

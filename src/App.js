@@ -47,6 +47,7 @@ import Store from "./store";
 
 import createOnce from "./createvivus.js";
 
+import Buy from "./buy";
 
 
 import './App.css';
@@ -121,29 +122,32 @@ class App extends Component {
     let nav = (
         <div className={"app__nav__box"}>
           <h2> Boutique </h2>
-	      <ul className={"app__nav__box__links"}>
-	        <li><Link to="/">Home</Link></li>
-	        <li><Link to="/about">About</Link></li>
-	        <li><Link to="/store">Store</Link></li>
-	      </ul>
-          <ul className="app__nav__box__social">
-            <li>
-                <a href="https://www.facebook.com/">
-                    <img src={facebookC} className="" alt="logo" />
-                </a>
-            </li>
-            <li>
-                <a href="https://twitter.com/?lang=en">
-                    <img src={twitterC} className="" alt="logo" />
-                </a>
-            </li>
-            <li>
-                <a href="/https://groups.google.com/forum/#!overview">
-                    <img src={googleC} className="" alt="logo" />
-                </a>
-            </li>
+          <div className={"app__nav__box__links"}>
+		      <ul className={"app__nav__box__links__routes"}>
+		        <li><Link to="/">Home</Link></li>
+		        <li><Link to="/about">About</Link></li>
+		        <li><Link to="/store">Store</Link></li>
+                <li><Link to="/buy">Buy Selection</Link></li>
+		      </ul>
+	          <ul className="app__nav__box__links__social">
+	            <li>
+	                <a href="https://www.facebook.com/">
+	                    <img src={facebookC} className="" alt="logo" />
+	                </a>
+	            </li>
+	            <li>
+	                <a href="https://twitter.com/?lang=en">
+	                    <img src={twitterC} className="" alt="logo" />
+	                </a>
+	            </li>
+	            <li>
+	                <a href="/https://groups.google.com/forum/#!overview">
+	                    <img src={googleC} className="" alt="logo" />
+	                </a>
+	            </li>
 
-          </ul>
+	          </ul>
+          </div>
           </div>
     )
     return (
@@ -157,6 +161,7 @@ class App extends Component {
 	            <Route path="/about" component={info}/>
 	            <Route path="/store" component={Store}/>
 	            <Route path="/boutique" component={Store}/>
+                <Route path="/buy" component={Buy}/>
 	        </Switch>
 	    </Fade>
         <img 

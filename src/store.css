@@ -14,8 +14,11 @@
 .store > object > svg{
     margin-top:150px;
 }
-
+/*Svg underneath object will take the same width/height as the object is is on. Therefore need to specify
+    so svg and img the same size
+*/
 .store__title {
     margin-top: 150px;
+    width:100%;
 }
 

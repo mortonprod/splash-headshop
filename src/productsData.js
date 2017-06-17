@@ -10,65 +10,59 @@ let data = []
 data.push({
     name:"box",
     description:"A box",
-    pic: box,
+    pic: dress,
     price:10
 })
 
 data.push({
     name:"box",
     description:"A box",
-    pic: box,
+    pic: cleaning,
     price:10
 })
 
 data.push({
     name:"arrow",
     description:"A box",
-    pic: arrow,
+    pic: redBra,
     price:10
 })
 
 data.push({
     name:"arrow",
     description:"A box",
-    pic: arrow,
+    pic: dress,
     price:10
 })
 
 data.push({
     name:"arrow",
     description:"A box",
-    pic: arrow,
+    pic: redBra,
     price:10
 })
 
 data.push({
     name:"head",
     description:"A head",
-    pic: head,
+    pic: dress,
     price:10
 })
 
 data.push({
     name:"arrow",
     description:"A box",
-    pic: arrow,
+    pic: dress,
     price:10
 })
 
 data.push({
     name:"arrow",
     description:"A box",
-    pic: arrow,
+    pic: cleaning,
     price:10
 })
 
-data.push({
-    name:"head",
-    description:"A head",
-    pic: head,
-    price:10
-})
 
 let offers = [];
 

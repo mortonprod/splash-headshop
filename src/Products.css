@@ -1,5 +1,7 @@
 ﻿.products {
+    position: relative;
     margin: 10px;
+    /*touch-action: pan-x pan-y;*/
 }
 .products__title {
     width: 100vw;
@@ -24,6 +26,7 @@
     position:relative;
     height:200px;
     margin:5px;
+    overflow:hidden;
 }
 
 
@@ -37,19 +40,76 @@
     overflow: hidden;
 }
 
-.product > h3, h4 {
-    margin: 5px;
+.product__name{
+    position:absolute;
+    top:0;
+    width:100%;
     font-family: 'Bubbler One', sans-serif;
+    font-size:30px;
     font-weight: bold;
+    color:white;
 }
 
-.product > button {
-    width: 50%;
-    border: solid;
+.product__description {
+    position: absolute;
+    top: 30%;
+    width: 100%;
+    font-family: 'Bubbler One', sans-serif;
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
 }
-/* Move Left*/
+
+.product__button {
+    position: absolute;
+    top: 70%;
+    width: 100%;
+    left:0;
+    font-family: 'Bubbler One', sans-serif;
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+}
+
+.products__box:hover > .products__button__left, .products__button__right {
+    transition: all 1s;
+    opacity: 1;
+}
+
+
+.products__box:hover > .products__button__right {
+    transition: all 1s;
+    opacity: 1;
+}
+
+
+
+.products__button__left {
+    position: absolute;
+    left: 10px;
+    top: 45%;
+    opacity: 0;
+    transition: all 1s;
+}
+
+.products__button__left:after {
+    content: "\003c\003c\003c";
+}
+
+.products__button__right {
+    position: absolute;
+    right: 10px;
+    top: 45%;
+    opacity: 0;
+    transition: all 1s;
+}
+
+.products__button__right:after {
+    content: "\003e\003e\003e";
+}
+
 .moveLeft-enter {
-    transform:translateX(1500px);
+    transform: translateX(1500px);
 }
 
 .moveLeft-enter.moveLeft-enter-active {
@@ -63,13 +123,13 @@
 }
 
 .moveLeft-leave.moveLeft-leave-active {
-    transform: tranlateX(-1500px);
+    transform: translateX(-1500px);
     transition: all 500ms ease-in;
 }
 
 /* Move Right*/
 .moveRight-enter {
-    transform: tranlateX(-1500px);
+    transform: translateX(-1500px);
 }
 
 .moveRight-enter.moveRight-enter-active {
@@ -83,7 +143,7 @@
 }
 
 .moveRight-leave.moveRight-leave-active {
-    transform: traslateX(1500px);
+    transform: translateX(1500px);
     transition: all 500ms easin;
 }
 

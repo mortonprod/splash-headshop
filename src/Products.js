@@ -18,9 +18,9 @@ export default class Products extends Component {
         ///This is needed since lodash is stateful.
         ///If leading true we will trigger event right away and cancel all calls for time specified.
         ///If trailing true then we trigger with again if there is another call(if the is one) at end of time.
-        this.start = _.debounce(this.start,500,{leading:true, trailing:false});
-        this.move = _.debounce(this.move,500,{leading:true, trailing:false});
-        this.end = _.debounce(this.end,500,{leading:true, trailing:false});
+        this.start = _.debounce(this.start,1000,{leading:true, trailing:false});
+        this.move = _.debounce(this.move,1000,{leading:true, trailing:false});
+        this.end = _.debounce(this.end,1000,{leading:true, trailing:false});
     }
     componentDidMount() {
 
@@ -118,23 +118,23 @@ export default class Products extends Component {
         }
     }
     ///Only called when touch.mouse down but make check anyway.
+    ///Mouse move is called without the mouse down so need to check for this.
     //Debounce is stateful so must not regenerate this for each re-render
     move(event){
-        console.log("move");
-
-        if(typeof event.clientX !== 'undefined'){
-            this.xE = event.clientX;     // Get the horizontal coordinate
-            this.yE = event.clientY;     // Get the vertical coordinate
-        }else if(event.touches !== null && event.touches.length !== 0){
-            this.xE = event.touches[0].clientX;
-            this.yE = event.touches[0].clientY;
-        }
         if(this.isTouching){
+            console.log("move");
+	        if(typeof event.clientX !== 'undefined'){
+	            this.xE = event.clientX;     // Get the horizontal coordinate
+	            this.yE = event.clientY;     // Get the vertical coordinate
+	        }else if(event.touches !== null && event.touches.length !== 0){
+	            this.xE = event.touches[0].clientX;
+	            this.yE = event.touches[0].clientY;
+	        }
 	        if(this.xE - this.xS >0){
-                this.moveLeft();
+                this.moveRight();
                 console.log(this.xE-this.xS + "  left.")
 	        }else if(this.xE - this.xS <0){ 
-                this.moveRight();   
+                this.moveLeft();   
                 console.log(this.xE-this.xS + "  right.")
 	        }else{
 	            console.log(this.xE-this.xS + "  No change of displacement.")
@@ -144,6 +144,7 @@ export default class Products extends Component {
     }
     end(event){
         console.log("end");
+        this.isTouching = false;
     }
     render(){
         let items = [];
@@ -175,13 +176,13 @@ export default class Products extends Component {
             }
             ///Must persist react synthetic event. 
             onTouchStart={
-                (event)=> { event.persist(); this.start(event) }
+                (event)=> { event.persist(); event.preventDefault(); this.start(event) }
             }
-            onTouchMove={(event)=> { event.persist(); this.move(event) }}
-            onTouchEnd={(event)=> { event.persist(); this.end(event) }}
-            onMouseDown={(event)=> { event.persist(); this.start(event) }}
-            onMouseMove={(event)=> { event.persist(); this.move(event) }}
-            onMouseUp={(event)=> { event.persist(); this.end(event) }}
+            onTouchMove={(event)=> { event.persist(); event.preventDefault(); this.move(event) }}
+            onTouchEnd={(event)=> { event.persist(); event.preventDefault(); this.end(event) }}
+            onMouseDown={(event)=> { event.persist(); event.preventDefault(); this.start(event) }}
+            onMouseMove={(event)=> { event.persist(); event.preventDefault(); this.move(event) }}
+            onMouseUp={(event)=> { event.persist(); event.preventDefault(); this.end(event) }}
              className="products">
                 <div className="products__box"> 
                     <h2 className="products__box__title"> {this.props.title} </h2>    
@@ -208,8 +209,8 @@ class Product extends Component {
     return (
         <div className="product">
             <img src={this.props.src} className="product__image" alt="logo" />
-            <h3>{this.props.name}</h3>
-            <h4>{this.props.description}</h4>
+            <h3 className="product__name">{this.props.name}</h3>
+            <h4 className="product__description">{this.props.description}</h4>
             <button className={"product__button"}> <span>£ {this.props.price} </span> </button>
         </div>
     )
