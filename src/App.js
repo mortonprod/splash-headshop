@@ -115,41 +115,35 @@ class App extends Component {
     if(this.state.isMenu){
         moveIn = "nav--moveIn"
     }
+    //onClick ={()=>{
+    //        this.setState({isMenu:false});
+    //    }} className={"nav " + moveIn}
     let nav = (
-        <div onClick ={()=>{
-            this.setState({isMenu:false});
-        }} className={"nav " + moveIn}>
-        <div>
-          <h2> What you'll find here </h2>
-	      <ul>
+        <div className={"app__nav__box"}>
+          <h2> Boutique </h2>
+	      <ul className={"app__nav__box__links"}>
 	        <li><Link to="/">Home</Link></li>
 	        <li><Link to="/about">About</Link></li>
 	        <li><Link to="/store">Store</Link></li>
 	      </ul>
-          <h2> What you'll find out there </h2>
-          <ul className="nav__bar--social">
+          <ul className="app__nav__box__social">
             <li>
                 <a href="https://www.facebook.com/">
-                    <img src={facebookC} className="nav__social nav__social--color" alt="logo" />
-                    <img src={facebookW} className="nav__social nav__social--white" alt="logo" />
-
+                    <img src={facebookC} className="" alt="logo" />
                 </a>
             </li>
             <li>
                 <a href="https://twitter.com/?lang=en">
-                    <img src={twitterC} className="nav__social nav__social--color" alt="logo" />
-                    <img src={twitterW} className="nav__social nav__social--white" alt="logo" />
+                    <img src={twitterC} className="" alt="logo" />
                 </a>
             </li>
             <li>
                 <a href="/https://groups.google.com/forum/#!overview">
-                    <img src={googleC} className="nav__social nav__social--color" alt="logo" />
-                    <img src={googleW} className="nav__social nav__social--white" alt="logo" />
+                    <img src={googleC} className="" alt="logo" />
                 </a>
             </li>
 
           </ul>
-          </div>
           </div>
     )
     return (
@@ -173,7 +167,7 @@ class App extends Component {
                 }
                 this.setState({isMenu:menu})
             }} 
-            src={menu} className="app__nav" alt="logo" 
+            src={menu} className="app__nav__button" alt="logo" 
         />
         {nav}
         </div>

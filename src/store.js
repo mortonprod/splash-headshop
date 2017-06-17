@@ -36,6 +36,8 @@ export default class Store extends Component {
 	    return (
 		    <div className="store">
                 {storeTitle}  
+                <h1>Check out the latest offers</h1>
+                <Products title={""} childWidth={220} data={getData().offers}/>
                 <Products title={"What other were interested in"} childWidth={220} data={getData().data}/>
 		    </div>
 	    )

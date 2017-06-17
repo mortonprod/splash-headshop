@@ -1,20 +1,21 @@
 ﻿.store {
     position: relative;
-    margin: 20px;
+    text-align:center;
+    background-image: linear-gradient(-180deg, #EC2A7C 47%, #D41346 100%);
+    border: 1px solid #979797;
+}
+
+.store h1 {
+    font-family: FjallaOne-Regular;
+    font-size: 60px;
+    color: #FFFFFF;
+}
+
+.store > object > svg{
+    margin-top:150px;
 }
 
 .store__title {
-    width: 100vw;
-    height:50vh;
+    margin-top: 150px;
 }
 
-.store__offers{
-    text-align:center;
-}
-
-.store__offers__list {
-    display: flex;
-    justify-content: center;
-    direction: columns;
-    flex-flow: wrap;
-}
