@@ -14,9 +14,13 @@ export default class Products extends Component {
             end:100,
             direction:""
         }
-        this.start = _.debounce(this.start,3000,{leading:true});
-        this.move = _.debounce(this.move,3000,{leading:true});
-        this.end = _.debounce(this.end,3000,{leading:true});
+        ///Need to create an instance function of debounce from the instance member functions.
+        ///This is needed since lodash is stateful.
+        ///If leading true we will trigger event right away and cancel all calls for time specified.
+        ///If trailing true then we trigger with again if there is another call(if the is one) at end of time.
+        this.start = _.debounce(this.start,500,{leading:true, trailing:false});
+        this.move = _.debounce(this.move,500,{leading:true, trailing:false});
+        this.end = _.debounce(this.end,500,{leading:true, trailing:false});
     }
     componentDidMount() {
 
@@ -169,6 +173,7 @@ export default class Products extends Component {
 		            });
                 }
             }
+            ///Must persist react synthetic event. 
             onTouchStart={
                 (event)=> { event.persist(); this.start(event) }
             }
