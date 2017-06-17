@@ -1,7 +1,7 @@
 ﻿import React, { Component } from 'react';
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; 
-import lo from "lodash";
+import * as _ from "lodash";
 
 import "./Products.css";
 export default class Products extends Component {
@@ -12,14 +12,17 @@ export default class Products extends Component {
             height: window.innerHeight,
             start:0,
             end:100,
-            direction:"" 
+            direction:""
         }
+        this.start = _.debounce(this.start,3000,{leading:true});
+        this.move = _.debounce(this.move,3000,{leading:true});
+        this.end = _.debounce(this.end,3000,{leading:true});
     }
     componentDidMount() {
 
     }
     componentWillMount(){
-        window.addEventListener('resize', lo.throttle(this.updateWindowDimensions.bind(this),500));
+        window.addEventListener('resize', _.throttle(this.updateWindowDimensions.bind(this),500));
         this.updateWindowDimensions();
 
     }
@@ -93,6 +96,51 @@ export default class Products extends Component {
         });
         },500);
     }
+    isTouching = false;
+    xS = 0;
+    yS = 0;
+    xE = 0;
+    yE = 0;
+    start(event){
+        console.log("start");
+        event.persist();
+        this.isTouching = true;
+        if(typeof event.clientX !== 'undefined'){
+	        this.xS = event.clientX;     // Get the horizontal coordinate
+	        this.yS = event.clientY;     // Get the vertical coordinate
+        }else if(event.touches[0].clientX !== 'undefined'){
+            this.xS = event.touches[0].clientX;
+            this.yS = event.touches[0].clientY;
+        }
+    }
+    ///Only called when touch.mouse down but make check anyway.
+    //Debounce is stateful so must not regenerate this for each re-render
+    move(event){
+        console.log("move");
+
+        if(typeof event.clientX !== 'undefined'){
+            this.xE = event.clientX;     // Get the horizontal coordinate
+            this.yE = event.clientY;     // Get the vertical coordinate
+        }else if(event.touches !== null && event.touches.length !== 0){
+            this.xE = event.touches[0].clientX;
+            this.yE = event.touches[0].clientY;
+        }
+        if(this.isTouching){
+	        if(this.xE - this.xS >0){
+                this.moveLeft();
+                console.log(this.xE-this.xS + "  left.")
+	        }else if(this.xE - this.xS <0){ 
+                this.moveRight();   
+                console.log(this.xE-this.xS + "  right.")
+	        }else{
+	            console.log(this.xE-this.xS + "  No change of displacement.")
+	        }
+        }
+
+    }
+    end(event){
+        console.log("end");
+    }
     render(){
         let items = [];
         for (let i = this.state.start; i < this.state.end; i++) {
@@ -110,7 +158,26 @@ export default class Products extends Component {
             console.log("Direction not set.")
         }
         return (
-            <div className="products">
+            <div onMouseEnter ={ 
+                () =>{ 
+		            this.setState({ 
+			            width: this.state.width, 
+			            height: this.state.height,
+			            start:this.state.start,
+			            end:this.state.end,
+			            direction:this.state.direction
+		            });
+                }
+            }
+            onTouchStart={
+                (event)=> { event.persist(); this.start(event) }
+            }
+            onTouchMove={(event)=> { event.persist(); this.move(event) }}
+            onTouchEnd={(event)=> { event.persist(); this.end(event) }}
+            onMouseDown={(event)=> { event.persist(); this.start(event) }}
+            onMouseMove={(event)=> { event.persist(); this.move(event) }}
+            onMouseUp={(event)=> { event.persist(); this.end(event) }}
+             className="products">
                 <div className="products__box"> 
                     <h2 className="products__box__title"> {this.props.title} </h2>    
                     <ReactCSSTransitionGroup
@@ -120,8 +187,8 @@ export default class Products extends Component {
                         transitionLeaveTimeout={500}>
                         {items}
                     </ReactCSSTransitionGroup> 
-                    <button onClick = {this.moveLeft.bind(this)} className={"products__button"}> <span>Left </span> </button>
-                    <button onClick = {this.moveRight.bind(this)} className={"products__button"}> <span>Right </span> </button>
+                    <button onClick = {this.moveLeft.bind(this)} className={"products__button__left"  }> </button>
+                    <button onClick = {this.moveRight.bind(this)} className={"products__button__right" }> </button>
                 </div>
                   
             </div>
