@@ -3,120 +3,17 @@ body{
     margin:0;
 }
 .app {
-    position:relative;
-    padding:0;
-    margin:0;
-
-}
-
-.app__nav__button {
-    position: absolute;
-    width: 50px;
-    height: auto;
-    top: 5px;
-    left: 5px;
-}
-
-.app__nav__box {
-    position: fixed;
-    width: 100vw;
-    top: 0px;
-    left: 0px;
-    background-image: linear-gradient(0deg, rgba(255,255,255,0.44) 0%, #000000 24%);
-    border: 1px solid #979797;
-    display: flex;
-}
-
-.app__nav__box li:hover{
-    transition:all 1s; 
-    transform:scale(1.2);
-}
-.app__nav__box > ul {
-    text-align: center;
+    position: relative;
     padding: 0;
-    width: 300px;
-    display: flex;
+    margin: 0;
+    width:100vw;
 }
 
-.app__nav__box > h2 {
-    font-family: Lobster-Regular;
-    font-size: 40px;
-    color: #DD0900;
-    width: 200px;
-    margin: auto;
-    margin-left: 50px;
-    margin-right: 50px;
-    display: inline;
-
+.showNav {
+    opacity: 1;
+    transform: translateY(0px);
 }
 
-.app__nav__box__links{
-    display:flex;
-    width:100%;
-    flex-direction:row;
-    flex-wrap:wrap;
-}
-
-.app__nav__box__links > ul{
-    margin-left:10%;
-}
-.app__nav__box__links__routes {
-    margin: auto;
-    margin-left: 0;
-    margin-right: 0;
-    padding: 0;
-    color: white;
-}
-.app__nav__box  a {
-    width: 40px;
-    color: white;
-}
-.app__nav__box__links__routes > li {
-    width:50px;
-    margin: 10px;
-    display: inline;
-    content: '\25BA';
-}
-
-.app__nav__box__links__social img {
-    width: 40px;
-}
-.app__nav__box__links__social > li {
-    margin: 10px;
-    display: inline;
-    content: '\25BA';
-}
-
-.app__nav__box__links__routes > li:before {
-    content: '\25BA';
-}
-
-
-@media screen and (max-width: 700px) {
-    /*.app__nav__box {
-        display:none;
-    }*/
-    .app__nav__box {
-        width: 100vw;
-        top: 0px;
-        left: 0px;
-        background-image: linear-gradient(0deg, rgba(255,255,255,0.44) 0%, #000000 24%);
-        border: 1px solid #979797;
-        display: flex;
-        flex-direction:column;
-    }
-    .app__nav__box > h2 {
-        margin:0;
-        
-    }
-
-}
-
-@media screen and (min-width: 700px) {
-    .app__nav__button {
-        display:none;
-    }
-}
 
 
 
@@ -189,26 +86,6 @@ body{
     margin:20px;
 }
 
-.app__info__left {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 20px;
-    margin: -20px;
-}
-
-.app__info__right {
-    position: absolute;
-    right: 0;
-    top: 0;
-    height:100%;
-    width: 20px;
-    margin: -20px;
-}
-
-
-
 .app__container--round {
     position:relative;
 }
@@ -224,6 +101,8 @@ body{
 .show{
     opacity:1;
 }
+
+
 
 @keyframes blink {
     0% {

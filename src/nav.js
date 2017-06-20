@@ -16,7 +16,6 @@ export default class Nav extends Component{
         this.scroll = _.throttle(this.scroll,200);
         this.resize = _.throttle(this.resize,200);
         this.state = {isButton:false,isShow:false}
-        this.resize();
     }
     resize(){
         if(window.innerWidth > this.props.threshold){
@@ -37,6 +36,7 @@ export default class Nav extends Component{
     componentDidMount(){
         window.addEventListener('resize',this.resize.bind(this));
         window.addEventListener('scroll',this.scroll.bind(this));
+        this.resize();
     }
     componentWillUnmount(){
         window.removeEventListener('resize',this.resize.bind(this));

@@ -33,7 +33,7 @@ export default class Chose extends Component {
         return (
             <div key={"chose"} className={"chose"}>
                 {comp}
-                <Link key="link1" to={"/boutique"} className="chose__link__left" alt="logo" ></Link>
+                <Link key="link1" to={"/"} className="chose__link__left" alt="logo" ></Link>
                 <Link key="link2" to={"/headshop"} className="chose__link__right" alt="logo" ></Link>
             </div>
         )

@@ -11,57 +11,229 @@ data.push({
     name:"box",
     description:"A box",
     pic: dress,
-    price:10
+    price:"£10"
 })
 
 data.push({
     name:"box",
     description:"A box",
     pic: cleaning,
-    price:10
+    price:"£10"
 })
 
 data.push({
     name:"arrow",
     description:"A box",
     pic: redBra,
-    price:10
+    price:"£10"
 })
 
 data.push({
     name:"arrow",
     description:"A box",
     pic: dress,
-    price:10
+    price:"£10"
 })
 
 data.push({
     name:"arrow",
     description:"A box",
     pic: redBra,
-    price:10
+    price:"£10"
 })
 
 data.push({
     name:"head",
     description:"A head",
     pic: dress,
-    price:10
+    price:"£10"
 })
 
 data.push({
     name:"arrow",
     description:"A box",
     pic: dress,
-    price:10
+    price:"£10"
 })
 
 data.push({
     name:"arrow",
     description:"A box",
     pic: cleaning,
-    price:10
+    price:"£10"
 })
+
+
+data.push({
+    name:"box",
+    description:"A box",
+    pic: dress,
+    price:"£10"
+})
+
+data.push({
+    name:"box",
+    description:"A box",
+    pic: cleaning,
+    price:"£10"
+})
+
+data.push({
+    name:"arrow",
+    description:"A box",
+    pic: redBra,
+    price:"£10"
+})
+
+data.push({
+    name:"arrow",
+    description:"A box",
+    pic: dress,
+    price:"£10"
+})
+
+data.push({
+    name:"arrow",
+    description:"A box",
+    pic: redBra,
+    price:"£10"
+})
+
+data.push({
+    name:"head",
+    description:"A head",
+    pic: dress,
+    price:"£10"
+})
+
+data.push({
+    name:"arrow",
+    description:"A box",
+    pic: dress,
+    price:"£10"
+})
+
+data.push({
+    name:"arrow",
+    description:"A box",
+    pic: cleaning,
+    price:"£10"
+})
+
+
+data.push({
+    name:"box",
+    description:"A box",
+    pic: dress,
+    price:"£10"
+})
+
+data.push({
+    name:"box",
+    description:"A box",
+    pic: cleaning,
+    price:"£10"
+})
+
+data.push({
+    name:"arrow",
+    description:"A box",
+    pic: redBra,
+    price:"£10"
+})
+
+data.push({
+    name:"arrow",
+    description:"A box",
+    pic: dress,
+    price:"£10"
+})
+
+data.push({
+    name:"arrow",
+    description:"A box",
+    pic: redBra,
+    price:"£10"
+})
+
+data.push({
+    name:"head",
+    description:"A head",
+    pic: dress,
+    price:"£10"
+})
+
+data.push({
+    name:"arrow",
+    description:"A box",
+    pic: dress,
+    price:"£10"
+})
+
+data.push({
+    name:"arrow",
+    description:"A box",
+    pic: cleaning,
+    price:"£10"
+})
+
+
+data.push({
+    name:"box",
+    description:"A box",
+    pic: dress,
+    price:"£10"
+})
+
+data.push({
+    name:"box",
+    description:"A box",
+    pic: cleaning,
+    price:"£10"
+})
+
+data.push({
+    name:"arrow",
+    description:"A box",
+    pic: redBra,
+    price:"£10"
+})
+
+data.push({
+    name:"arrow",
+    description:"A box",
+    pic: dress,
+    price:"£10"
+})
+
+data.push({
+    name:"arrow",
+    description:"A box",
+    pic: redBra,
+    price:"£10"
+})
+
+data.push({
+    name:"head",
+    description:"A head",
+    pic: dress,
+    price:"£10"
+})
+
+data.push({
+    name:"arrow",
+    description:"A box",
+    pic: dress,
+    price:"£10"
+})
+
+data.push({
+    name:"arrow",
+    description:"A box",
+    pic: cleaning,
+    price:"£10"
+})
+
 
 
 let offers = [];

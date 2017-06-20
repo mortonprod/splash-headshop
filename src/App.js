@@ -6,6 +6,7 @@ import {
   Switch
 } from 'react-router-dom'
 
+import * as _ from "lodash";
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; 
 
 import Vivus from 'vivus';
@@ -31,12 +32,7 @@ import aboutUs from './assets/aboutUs.svg';
 import lines from './assets/lines.svg';
 import menu from './assets/menu.svg';
 
-import googleC from './assets/Google_Color.svg';
-import googleW from './assets/Google_White.svg';
-import facebookC from './assets/Facebook_Color.svg';
-import facebookW from './assets/Facebook_White.svg';
-import twitterC from './assets/Twitter_Color.svg';
-import twitterW from './assets/Twitter_White.svg';
+
 
 import what from './assets/what.svg';
 import whatElse from './assets/else.svg';
@@ -48,24 +44,25 @@ import Store from "./store";
 import createOnce from "./createvivus.js";
 
 import Buy from "./buy";
-
+import About from "./about";
+import Nav from "./nav";
 
 import './App.css';
-
-let infoContent = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,"
-
-
 
 class App extends Component {
   constructor(){
     super();
-    this.state = {isMenu:false};
+    this.scroll = _.throttle(this.scroll,10);
+    this.state = {isDown:false,isNavButton:false};
   }
+  componentDidMount(){
+        window.addEventListener('scroll', this.scroll.bind(this));
+  }
+  componentWillUnmount(){
+    window.removeEventListener('scroll', this.scroll.bind(this));
+  }
+
   render() {
-    let show = ""
-    if(this.state.isMenu){//So we don't show animation everytime
-     show = "show"   
-    }
     const comp =  () =>{
         return (
 	            <BoxTL isOver={true} className={"app__container__box"} classContainer={"app__container--full"} name="box" duration={200} src={box} type="delayed">
@@ -81,7 +78,7 @@ class App extends Component {
 	                <img src={close6Eye} className="app__container__eye app__container__eye--delay9" alt="logo" />
 	                <img src={close7Eye} className="app__container__eye app__container__eye--delay10" alt="logo" />
 	                <img src={head} 
-                     className={"app__container__eye app__container__eye--delay11 " + show}
+                     className={"app__container__eye app__container__eye--delay11 "}
                      alt="logo" />
 	                <Link ref={() => {
                         createOnce("arrow","100","autostart",arrow)
@@ -94,87 +91,19 @@ class App extends Component {
 	    )
     }
 
-    const info = () => {
-        return (
-        <div className="app__info">
-            <object ref={() => {
-                createOnce("info","500","autostart",aboutUs)                      
-            }} className="app__box__info" id="info"></object>
-            <p>
-             {infoContent}
-            </p>
-            <object ref={() => {
-                createOnce("left","1000","autostart",lines)                      
-            }} className="app__info__left" id="left"></object>
-            <object ref={() => {
-                createOnce("right","1000","autostart",lines)                      
-            }} className="app__info__right" id="right"></object>
-        </div>
-    )
-    }
-    let moveIn = ""
-    if(this.state.isMenu){
-        moveIn = "nav--moveIn"
-    }
-    //onClick ={()=>{
-    //        this.setState({isMenu:false});
-    //    }} className={"nav " + moveIn}
-    let nav = (
-        <div className={"app__nav__box"}>
-          <h2> Boutique </h2>
-          <div className={"app__nav__box__links"}>
-		      <ul className={"app__nav__box__links__routes"}>
-		        <li><Link to="/">Home</Link></li>
-		        <li><Link to="/about">About</Link></li>
-		        <li><Link to="/store">Store</Link></li>
-                <li><Link to="/buy">Buy Selection</Link></li>
-		      </ul>
-	          <ul className="app__nav__box__links__social">
-	            <li>
-	                <a href="https://www.facebook.com/">
-	                    <img src={facebookC} className="" alt="logo" />
-	                </a>
-	            </li>
-	            <li>
-	                <a href="https://twitter.com/?lang=en">
-	                    <img src={twitterC} className="" alt="logo" />
-	                </a>
-	            </li>
-	            <li>
-	                <a href="/https://groups.google.com/forum/#!overview">
-	                    <img src={googleC} className="" alt="logo" />
-	                </a>
-	            </li>
-
-	          </ul>
-          </div>
-          </div>
-    )
     return (
 
      <Router>
         <div className="app">
 	    <Fade>
 	        <Switch>
-	            <Route exact path="/" component={Chose}/>
-	            <Route exact path="/Home" component={comp}/>
-	            <Route path="/about" component={info}/>
-	            <Route path="/store" component={Store}/>
-	            <Route path="/boutique" component={Store}/>
+	            <Route exact path="/" component={Store}/>
+	            <Route path="/about" component={About}/>
                 <Route path="/buy" component={Buy}/>
+                <Route path="/more" component={Chose}/>
 	        </Switch>
 	    </Fade>
-        <img 
-            onClick= { () =>{
-                let menu = true;
-                if(this.state.isMenu){
-                    menu = false;
-                }
-                this.setState({isMenu:menu})
-            }} 
-            src={menu} className="app__nav__button" alt="logo" 
-        />
-        {nav}
+        <Nav threshold={900}/>
         </div>
       </Router>
 

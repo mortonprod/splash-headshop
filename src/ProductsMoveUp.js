@@ -3,7 +3,7 @@ import Product from "./Product";
 import * as _ from "lodash";
 
 import "./ProductsMoveUp.css";
-
+///Thursday 12:20
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; 
 //If the user has placed the productsMoveUp div at the middle of the view port. 
 //Put more products at bottom moving the bottom away from the div parent.

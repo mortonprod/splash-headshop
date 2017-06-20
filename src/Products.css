@@ -36,7 +36,6 @@
 .products__box__items__list {
     position: relative;
     display: flex;
-    justify-content: columns;
     justify-content: center;
     align-content: center;
     overflow: hidden;
