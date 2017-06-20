@@ -1,4 +1,19 @@
-﻿.products {
+﻿@keyframes flash{
+    0%{
+        transform:scale(1);
+        opacity:0;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+.products {
     position: relative;
     margin: 10px;
     /*touch-action: pan-x pan-y;*/
@@ -8,114 +23,71 @@
     height: 50vh;
 }
 
+.products__box__title {
+    font-family: FjallaOne-Regular;
+    font-size: 40px;
+    color: #FFFFFF;
+}
+
 .products__box {
     text-align: center;
-
 }
 
-.products__box__list {
+.products__box__items__list {
+    position: relative;
     display: flex;
     justify-content: columns;
-    justify-content:center;
-    align-content:center;
+    justify-content: center;
+    align-content: center;
     overflow: hidden;
-    margin:auto;
+    margin: auto;
 }
 
-.product {
-    position:relative;
-    height:200px;
-    margin:5px;
-    overflow:hidden;
-}
-
-
-.product__image {
-    position: relative;
-    border: solid;
-    left: 0;
-    top: 0;
-    height:100%;
-    margin:auto;
-    overflow: hidden;
-}
-
-.product__name{
-    position:absolute;
-    top:0;
-    width:100%;
-    font-family: 'Bubbler One', sans-serif;
-    font-size:30px;
-    font-weight: bold;
-    color:white;
-}
-
-.product__description {
+.products__box__items__button {
     position: absolute;
-    top: 30%;
-    width: 100%;
-    font-family: 'Bubbler One', sans-serif;
-    font-weight: bold;
-    color: white;
-    font-size: 20px;
-}
-
-.product__button {
-    position: absolute;
-    top: 70%;
-    width: 100%;
-    left:0;
-    font-family: 'Bubbler One', sans-serif;
-    font-weight: bold;
-    color: white;
-    font-size: 20px;
-}
-
-.products__box:hover > .products__button__left, .products__button__right {
-    transition: all 1s;
-    opacity: 1;
-}
-
-
-.products__box:hover > .products__button__right {
-    transition: all 1s;
-    opacity: 1;
-}
-
-
-
-.products__button__left {
-    position: absolute;
-    left: 10px;
-    top: 45%;
     opacity: 0;
-    transition: all 1s;
+    border: 0;
+    top: 30%;
+    height: 40%;
+    color: #D41346;
+    background-color: transparent;
+    font-size: 25px;
+}
+.products__box__items__button__left {
+    left: 10px;
 }
 
-.products__button__left:after {
+.products__box__items__button__left:after {
     content: "\003c\003c\003c";
 }
 
-.products__button__right {
-    position: absolute;
+.products__box__items__button__right {
     right: 10px;
-    top: 45%;
-    opacity: 0;
-    transition: all 1s;
 }
 
-.products__button__right:after {
+.products__box__items__button__right:after {
     content: "\003e\003e\003e";
+}
+
+
+.products__box__items__list:hover > .products__box__items__button__right {
+    animation: flash 1s infinite;
+}
+
+.products__box__items__list:hover > .products__box__items__button__left {
+    animation: flash 1s infinite;
 }
 
 .moveLeft-enter {
     transform: translateX(1500px);
+    transition: all 500ms ease-in;
 }
 
 .moveLeft-enter.moveLeft-enter-active {
-    transform: translateX(0px); 
+    transform: translateX(0px);
     transition: all 500ms ease-in;
 }
+
 
 .moveLeft-leave {
     transform: translateX(0px);
@@ -127,9 +99,12 @@
     transition: all 500ms ease-in;
 }
 
+
+
 /* Move Right*/
 .moveRight-enter {
     transform: translateX(-1500px);
+    transition: all 500ms ease-in;
 }
 
 .moveRight-enter.moveRight-enter-active {

@@ -2,7 +2,7 @@
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; 
 import * as _ from "lodash";
-
+import Product from "./Product";
 import "./Products.css";
 export default class Products extends Component {
     constructor(props){
@@ -18,9 +18,11 @@ export default class Products extends Component {
         ///This is needed since lodash is stateful.
         ///If leading true we will trigger event right away and cancel all calls for time specified.
         ///If trailing true then we trigger with again if there is another call(if the is one) at end of time.
-        this.start = _.debounce(this.start,1000,{leading:true, trailing:false});
-        this.move = _.debounce(this.move,1000,{leading:true, trailing:false});
-        this.end = _.debounce(this.end,1000,{leading:true, trailing:false});
+        this.start = _.debounce(this.start,500,{leading:true, trailing:false});
+        this.moveTouch = _.debounce(this.moveTouch,500,{leading:true, trailing:false});
+        //Needs to be different since we need to move when we have pushed down on mouse.
+        this.move = _.throttle(this.move,500,{leading:false, trailing:true});
+        this.end = _.throttle(this.end,10,{leading:false, trailing:true});
     }
     componentDidMount() {
 
@@ -105,9 +107,9 @@ export default class Products extends Component {
     yS = 0;
     xE = 0;
     yE = 0;
+    //Use this to get the original position of touch or mouse down.
     start(event){
         console.log("start");
-        event.persist();
         this.isTouching = true;
         if(typeof event.clientX !== 'undefined'){
 	        this.xS = event.clientX;     // Get the horizontal coordinate
@@ -117,30 +119,42 @@ export default class Products extends Component {
             this.yS = event.touches[0].clientY;
         }
     }
-    ///Only called when touch.mouse down but make check anyway.
-    ///Mouse move is called without the mouse down so need to check for this.
-    //Debounce is stateful so must not regenerate this for each re-render
+    ///Only need a single method since you are mouse down when you are using touch screen.
+    moveTouch(event){
+	    console.log("Move touch");
+        if(event.touches !== null && event.touches.length !== 0){
+	        this.xE = event.touches[0].clientX;
+	        this.yE = event.touches[0].clientY;
+	    }
+	    if(this.xE - this.xS >0){
+	        this.moveRight();
+	        console.log(this.xE-this.xS + "  left.")
+	    }else if(this.xE - this.xS <0){ 
+	        this.moveLeft();   
+	        console.log(this.xE-this.xS + "  right.")
+	    }else{
+	        console.log(this.xE-this.xS + "  No change of displacement.")
+        }
+
+
+    }
     move(event){
         if(this.isTouching){
-            console.log("move");
-	        if(typeof event.clientX !== 'undefined'){
-	            this.xE = event.clientX;     // Get the horizontal coordinate
-	            this.yE = event.clientY;     // Get the vertical coordinate
-	        }else if(event.touches !== null && event.touches.length !== 0){
-	            this.xE = event.touches[0].clientX;
-	            this.yE = event.touches[0].clientY;
-	        }
+            if(typeof event.clientX !== 'undefined'){
+                this.xE = event.clientX;    
+                this.yE = event.clientY;     
+            }
+	        console.log("Move touch");
 	        if(this.xE - this.xS >0){
-                this.moveRight();
-                console.log(this.xE-this.xS + "  left.")
+	            this.moveRight();
+	            console.log(this.xE-this.xS + "  left.")
 	        }else if(this.xE - this.xS <0){ 
-                this.moveLeft();   
-                console.log(this.xE-this.xS + "  right.")
+	            this.moveLeft();   
+	            console.log(this.xE-this.xS + "  right.")
 	        }else{
 	            console.log(this.xE-this.xS + "  No change of displacement.")
 	        }
         }
-
     }
     end(event){
         console.log("end");
@@ -174,27 +188,30 @@ export default class Products extends Component {
 		            });
                 }
             }
-            ///Must persist react synthetic event. 
-            onTouchStart={
-                (event)=> { event.persist(); event.preventDefault(); this.start(event) }
-            }
-            onTouchMove={(event)=> { event.persist(); event.preventDefault(); this.move(event) }}
-            onTouchEnd={(event)=> { event.persist(); event.preventDefault(); this.end(event) }}
-            onMouseDown={(event)=> { event.persist(); event.preventDefault(); this.start(event) }}
-            onMouseMove={(event)=> { event.persist(); event.preventDefault(); this.move(event) }}
-            onMouseUp={(event)=> { event.persist(); event.preventDefault(); this.end(event) }}
+            ///Need this to get the original position.
+            onTouchStart={(event)=> { event.persist(); event.preventDefault();  this.start(event) }}
+            //Called when touched and moved
+            onTouchMove={(event)=> { event.persist(); event.preventDefault();  this.moveTouch(event) }}
+            //Called when mouse down
+            onMouseDown={(event)=> { event.persist(); event.preventDefault();  this.start(event) }}
+            ///Called when mouse is DOWN OR UP and over element
+            onMouseMove={(event)=> { event.persist(); event.preventDefault();  this.move(event) }}
+            ///Called once when mouse comes up
+            onMouseUp={(event)=> { event.persist(); event.preventDefault();  this.end(event) }}
              className="products">
                 <div className="products__box"> 
-                    <h2 className="products__box__title"> {this.props.title} </h2>    
-                    <ReactCSSTransitionGroup
-                        className="products__box__list"
-                        transitionName={this.state.direction}
-                        transitionEnterTimeout={500}
-                        transitionLeaveTimeout={500}>
-                        {items}
-                    </ReactCSSTransitionGroup> 
-                    <button onClick = {this.moveLeft.bind(this)} className={"products__button__left"  }> </button>
-                    <button onClick = {this.moveRight.bind(this)} className={"products__button__right" }> </button>
+                    <h2 className="products__box__title"> {this.props.title} </h2>
+                    <div className={"products__box__items__list"}>    
+	                    <ReactCSSTransitionGroup
+	                        className="products__box__items__list"
+	                        transitionName={this.state.direction}
+	                        transitionEnterTimeout={500}
+	                        transitionLeaveTimeout={500}>
+	                        {items}
+	                    </ReactCSSTransitionGroup> 
+	                    <button onClick = {this.moveLeft.bind(this)} className={"products__box__items__button products__box__items__button__left"  }> </button>
+	                    <button onClick = {this.moveRight.bind(this)} className={"products__box__items__button products__box__items__button__right" }> </button>
+                    </div>
                 </div>
                   
             </div>
@@ -202,18 +219,3 @@ export default class Products extends Component {
     }
 }
 
-class Product extends Component {
-  componentDidMount(){
-  }
-  render() {
-    return (
-        <div className="product">
-            <img src={this.props.src} className="product__image" alt="logo" />
-            <h3 className="product__name">{this.props.name}</h3>
-            <h4 className="product__description">{this.props.description}</h4>
-            <button className={"product__button"}> <span>£ {this.props.price} </span> </button>
-        </div>
-    )
-        
-  }
-}
