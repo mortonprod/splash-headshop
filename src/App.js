@@ -52,14 +52,7 @@ import './App.css';
 class App extends Component {
   constructor(){
     super();
-    this.scroll = _.throttle(this.scroll,10);
     this.state = {isDown:false,isNavButton:false};
-  }
-  componentDidMount(){
-        window.addEventListener('scroll', this.scroll.bind(this));
-  }
-  componentWillUnmount(){
-    window.removeEventListener('scroll', this.scroll.bind(this));
   }
 
   render() {
@@ -90,7 +83,6 @@ class App extends Component {
 	        
 	    )
     }
-
     return (
 
      <Router>
