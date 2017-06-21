@@ -20,7 +20,8 @@ import Buy from "./buy";
 import About from "./about";
 import Nav from "./nav";
 
-import Eye from "./eye"
+import Eye from "./eye";
+
 
 import './App.css';
 

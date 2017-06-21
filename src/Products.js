@@ -81,7 +81,7 @@ export default class Products extends Component {
         let newStart = this.state.start-this.getNumBoxes();
         let newBoxes = this.state.end-this.getNumBoxes();
         if(newStart < 0){
-            newStart= this.props.data.length-this.getNumBoxes();
+            newStart= this.props.data.length-this.getNumBoxes() -1;
             newBoxes = this.props.data.length - 1;
         }
 
@@ -177,7 +177,7 @@ export default class Products extends Component {
             console.log("Direction not set.")
         }
         return (
-            <div onMouseEnter ={ 
+            <article onMouseEnter ={ 
                 () =>{ 
 		            this.setState({ 
 			            width: this.state.width, 
@@ -200,7 +200,9 @@ export default class Products extends Component {
             onMouseUp={(event)=> { event.persist(); event.preventDefault();  this.end(event) }}
              className="products">
                 <div className="products__box"> 
-                    <h2 className="products__box__title"> {this.props.title} </h2>
+                    <header>
+                        <h2 className="products__box__title"> {this.props.title} </h2>
+                    </header>
                     <div className={"products__box__items__list"}>    
 	                    <ReactCSSTransitionGroup
 	                        className="products__box__items__list"
@@ -214,7 +216,7 @@ export default class Products extends Component {
                     </div>
                 </div>
                   
-            </div>
+            </article>
         )
     }
 }

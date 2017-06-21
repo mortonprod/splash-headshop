@@ -8,28 +8,28 @@ import dress from './assets/tamara-bellis-256701.jpg'
 let data = []
 
 data.push({
-    name:"box",
+    name:"Shoes",
     description:"A box",
     pic: dress,
     price:"£10"
 })
 
 data.push({
-    name:"box",
+    name:"Dress",
     description:"A box",
     pic: cleaning,
     price:"£10"
 })
 
 data.push({
-    name:"arrow",
+    name:"accessories",
     description:"A box",
     pic: redBra,
     price:"£10"
 })
 
 data.push({
-    name:"arrow",
+    name:"blouse",
     description:"A box",
     pic: dress,
     price:"£10"
@@ -239,28 +239,28 @@ data.push({
 let offers = [];
 
 offers.push({
-    name:"Sale",
+    name:"",
     description:"2 for 1 dresses and selected items",
     pic: dress,
     price:null
 })
 
 offers.push({
-    name:"Sale",
-    description:"2 for 1 dresses and selected items",
+    name:"",
+    description:"Buy 1 get 1 free",
     pic: model,
     price:null
 })
 
 offers.push({
-    name:"Sale",
-    description:"2 for 1 dresses and selected items",
+    name:"",
+    description:"3 for 2 on something",
     pic: redBra,
     price:null
 })
 
 offers.push({
-    name:"Sale",
+    name:"",
     description:"2 for 1 dresses and selected items",
     pic: cleaning,
     price:null

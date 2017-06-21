@@ -65,7 +65,7 @@ export default class Nav extends Component{
             )
         }else{
             comp = (
-                <div
+                <nav
                     onClick={()=>{
                         let isButton = true;
                         if(this.state.isButton){
@@ -75,34 +75,43 @@ export default class Nav extends Component{
                     }} 
                     className={"nav__box " + show}
                 >
-                <h2> Boutique </h2>
-                  <div className={"nav__box__links"}>
-                      <ul className={"nav__box__links__routes"}>
-                        <li><Link to="/">Home</Link></li>
-                        <li><Link to="/about">About</Link></li>
-                        <li><Link to="/buy">Buy</Link></li>
-                        <li><Link to="/more">More</Link></li>
-                      </ul>
-                      <ul className="nav__box__links__social">
-                        <li>
-                            <a href="https://www.facebook.com/">
-                                <img src={facebookC} className="" alt="logo" />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://twitter.com/?lang=en">
-                                <img src={twitterC} className="" alt="logo" />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/https://groups.google.com/forum/#!overview">
-                                <img src={googleC} className="" alt="logo" />
-                            </a>
-                        </li>
+                 <div className={"nav__full"}></div>
+                  <header>
+                    <h2> Boutique </h2>
+                  </header>
+                  <section className={"nav__box__links"}>
+                      <article>
+	                      <h3> What you'll find here: </h3>
+	                      <ul className={"nav__box__links__routes"}>
+	                        <li><Link to="/">Home</Link></li>
+	                        <li><Link to="/about">About</Link></li>
+	                        <li><Link to="/buy">Buy</Link></li>
+	                        <li><Link to="/more">More</Link></li>
+	                      </ul>
+                      </article>
+                      <article>
+	                      <h3> Login: </h3>
+	                      <ul className="nav__box__links__social">
+	                        <li>
+	                            <a href="https://www.facebook.com/">
+	                                <img src={facebookC} className="" alt="logo" />
+	                            </a>
+	                        </li>
+	                        <li>
+	                            <a href="https://twitter.com/?lang=en">
+	                                <img src={twitterC} className="" alt="logo" />
+	                            </a>
+	                        </li>
+	                        <li>
+	                            <a href="/https://groups.google.com/forum/#!overview">
+	                                <img src={googleC} className="" alt="logo" />
+	                            </a>
+	                        </li>
 
-                      </ul>
-                  </div>
-              </div>
+	                      </ul>
+                        </article>
+                  </section>
+              </nav>
 
             )
         }

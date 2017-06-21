@@ -57,10 +57,12 @@ export default class Store extends Component {
             )
         }
 	    return (
-		    <div className="store">
+		    <section className="store">
                 {storeTitle}  
                 <div className="store__content">
-                <h1>Check out the latest offers</h1>
+                <header>
+                    <h1>Check out the latest offers</h1>
+                </header>
                 <Products title={""} childWidth={220} data={getData().offers}/>
                 <Products title={"What other were interested in"} childWidth={220} data={getData().data}/>
                 <ProductsMoveUp 
@@ -69,7 +71,7 @@ export default class Store extends Component {
                     data={getData().data}
                 />
                 </div>
-		    </div>
+		    </section>
 	    )
     }
 }

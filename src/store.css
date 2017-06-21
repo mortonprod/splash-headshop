@@ -14,6 +14,10 @@
     margin-top: 100vh;
 }
 
+.store__content header {
+    margin:0;
+}
+
 .store__content h1 {
     font-family: FjallaOne-Regular;
     font-size: 60px;
