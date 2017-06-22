@@ -16,14 +16,14 @@ data.push({
 
 data.push({
     name:"Dress",
-    description:"A box",
+    description:"Green dress",
     pic: cleaning,
     price:"£10"
 })
 
 data.push({
     name:"accessories",
-    description:"A box",
+    description:"",
     pic: redBra,
     price:"£10"
 })

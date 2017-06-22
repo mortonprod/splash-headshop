@@ -9,7 +9,7 @@ let isMounted = false;
 export default class About extends Component {
     constructor(){
         super();
-        this.scroll = _.throttle(this.scroll.bind(this),this.time/this.steps);
+        //this.scroll = _.throttle(this.scroll.bind(this),this.time/this.steps);
         this.state = {scale:[0,0],translateY:[0,0],top:[0,0]}
     }
     el = [];
@@ -35,47 +35,51 @@ export default class About extends Component {
         let isMovingDown = null;
         let scrollTop = event.srcElement.body.scrollTop;
         if(event.srcElement.body.scrollTop <     this.scrollTop){
-           isMovingDown = true; 
+          isMovingDown = false;
+          console.log("isMovingDown: false");
         }else{
-           isMovingDown = false;
+          isMovingDown = true; 
+          console.log("isMovingDown: true");
         }
         let scale = [this.state.scale[0],this.state.scale[1]];
         let translateY = [this.state.translateY[0],this.state.translateY[1]];
         let top = [this.state.top[0],this.state.top[1]];
         if(this.scrollTop !== null){
             let moveNum = 1;
-            let height = window.innerHeight;
+            let height = window.innerHeight/2;
             for(let i=0; i < moveNum; i++){
-                this.setState({scale: scale,top:top});
                 let bottom = this.el[i].getBoundingClientRect().bottom;
 	            let isAdd = null;
 	            if(bottom > height){///If object is at top half of screen then shrink agains 
 	                isAdd = true; 
+                    console.log("bottom(" + bottom + ") > height(" + height + "): true ");
 	            }else{
-	                isAdd = false;
+	                isAdd = true;
+                    console.log("bottom(" + bottom + ") > height(" + height + "): false");
 
 	            }
 	            if(isMovingDown){//If direction of scroll changes then skrink rather than expand or vis vera.
 	                if(isAdd){
-	                    scale[i] = this.scale[i] + this.scaleChunk;
+	                    scale[i] = this.state.scale[i] + this.scaleChunk;
 	                }else{
-	                    scale[i] = this.scale[i] - this.scaleChunk;
+	                    scale[i] = this.state.scale[i] - this.scaleChunk;
 	                }
 	            }else{
 	                if(!isAdd){
-	                    scale[i] = this.scale[i] + this.scaleChunk;
+	                    scale[i] = this.state.scale[i] + this.scaleChunk;
 	                }else{
-	                    scale[i] = this.scale[i] - this.scaleChunk;
+	                    scale[i] = this.state.scale[i] - this.scaleChunk;
 	                }
                 }
 	            if(isMovingDown){//Change direction of translate if scroll direction changes.
 	             //   translateY[0] = this.state.translateY + this.heightChunk;
 	             //   translateY[1] = this.state.translateY + this.heightChunk;
-	                  top[i] = this.state.top[i] + this.heightChunk;
+
+                      top[i] = this.state.top[i] - this.heightChunk;
 	            }else{
 	             //   translateY[0] = this.state.translateY - this.heightChunk;
 	              //  translateY[1] = this.state.translateY - this.heightChunk;
-	              top[i] = this.state.top[i] - this.heightChunk;
+                      top[i] = this.state.top[i] + this.heightChunk;
 	            }
             }
         }
