@@ -14,15 +14,6 @@ export default class Products extends Component {
             end:100,
             direction:""
         }
-        ///Need to create an instance function of debounce from the instance member functions.
-        ///This is needed since lodash is stateful.
-        ///If leading true we will trigger event right away and cancel all calls for time specified.
-        ///If trailing true then we trigger with again if there is another call(if the is one) at end of time.
-        this.start = _.debounce(this.start,500,{leading:true, trailing:false});
-        this.moveTouch = _.debounce(this.moveTouch,500,{leading:true, trailing:false});
-        //Needs to be different since we need to move when we have pushed down on mouse.
-        this.move = _.throttle(this.move,500,{leading:false, trailing:true});
-        this.end = _.throttle(this.end,10,{leading:false, trailing:true});
     }
     componentDidMount() {
 
@@ -114,63 +105,51 @@ export default class Products extends Component {
         });
         },600);
     }
-    isTouching = false;
-    xS = 0;
-    yS = 0;
-    xE = 0;
-    yE = 0;
-    //Use this to get the original position of touch or mouse down.
+    xyS = [null,null];
+    //Only used for mouse events.
     start(event){
         console.log("start");
-        this.isTouching = true;
-        if(typeof event.clientX !== 'undefined'){
-	        this.xS = event.clientX;     // Get the horizontal coordinate
-	        this.yS = event.clientY;     // Get the vertical coordinate
-        }else if(event.touches[0].clientX !== 'undefined'){
-            this.xS = event.touches[0].clientX;
-            this.yS = event.touches[0].clientY;
-        }
-    }
-    ///Only need a single method since you are mouse down when you are using touch screen.
-    moveTouch(event){
-	    console.log("Move touch");
-        if(event.touches !== null && event.touches.length !== 0){
-	        this.xE = event.touches[0].clientX;
-	        this.yE = event.touches[0].clientY;
-	    }
-	    if(this.xE - this.xS >0){
-	        this.moveRight();
-	        console.log(this.xE-this.xS + "  left.")
-	    }else if(this.xE - this.xS <0){ 
-	        this.moveLeft();   
-	        console.log(this.xE-this.xS + "  right.")
-	    }else{
-	        console.log(this.xE-this.xS + "  No change of displacement.")
-        }
-
+        this.xyS = this.getXY(event);
 
     }
+    xyE = [null,null];
+    ///Keep updating since touchEnd does not contain coordinates.
     move(event){
-        if(this.isTouching){
-            if(typeof event.clientX !== 'undefined'){
-                this.xE = event.clientX;    
-                this.yE = event.clientY;     
-            }
-	        console.log("Move touch");
-	        if(this.xE - this.xS >0){
-	            this.moveRight();
-	            console.log(this.xE-this.xS + "  left.")
-	        }else if(this.xE - this.xS <0){ 
-	            this.moveLeft();   
-	            console.log(this.xE-this.xS + "  right.")
-	        }else{
-	            console.log(this.xE-this.xS + "  No change of displacement.")
-	        }
-        }
+        this.xyE = this.getXY(event);
+    }
+    getXY(event){
+	    let x = null;
+	    let y = null;
+	    if(typeof event.clientX !== 'undefined'){
+	        x = event.clientX;    
+	        y = event.clientY;     
+	    }else if (event.touches !== null && event.touches.length !== 0){
+	        x = event.touches[0].clientX;
+	        y = event.touches[0].clientY;
+	    }else{
+	        console.log("Not touched or mouse move?");
+	    }
+        return [x,y];
     }
     end(event){
         console.log("end");
-        this.isTouching = false;
+        let xyE = this.xyE;
+        let xS = this.xyS[0];
+        let yS = this.xyS[1];
+        let xE = this.xyE[0];
+        let yE = this.xyE[1];
+
+        if(xS !== null && xE  !== null){
+	        if(xE - xS >0){
+	            this.moveRight();
+	            console.log(xE-this.xS + "  left.")
+	        }else if(xE - xS <0){ 
+	            this.moveLeft();   
+	            console.log(xE-xS + "  right.")
+	        }else{
+	            console.log(xE-xS + "  No change of displacement or still null.")
+	        }
+        }
     }
     render(){
         let items = [];
@@ -189,26 +168,12 @@ export default class Products extends Component {
             console.log("Direction not set.")
         }
         return (
-            <article onMouseEnter ={ 
-                () =>{ 
-		            this.setState({ 
-			            width: this.state.width, 
-			            height: this.state.height,
-			            start:this.state.start,
-			            end:this.state.end,
-			            direction:this.state.direction
-		            });
-                }
-            }
-            ///Need this to get the original position.
+            <article 
             onTouchStart={(event)=> { event.persist(); event.preventDefault();  this.start(event) }}
-            //Called when touched and moved
-            onTouchMove={(event)=> { event.persist(); event.preventDefault();  this.moveTouch(event) }}
-            //Called when mouse down
+            onTouchMove={(event)=> { event.persist(); event.preventDefault();  this.move(event) }}
+            onTouchEnd={(event)=> { event.persist(); event.preventDefault();  this.end(event) }}
             onMouseDown={(event)=> { event.persist(); event.preventDefault();  this.start(event) }}
-            ///Called when mouse is DOWN OR UP and over element
             onMouseMove={(event)=> { event.persist(); event.preventDefault();  this.move(event) }}
-            ///Called once when mouse comes up
             onMouseUp={(event)=> { event.persist(); event.preventDefault();  this.end(event) }}
              className="products">
                 <div className="products__box"> 

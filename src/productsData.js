@@ -81,10 +81,10 @@ offers.push({
 })
 
 offers.push({
-    title:"Our Basket",
+    title:null,
     description:"A selection of our best products",
     pic: pic2,
-    price:"£5"
+    price:null
 })
 
 
