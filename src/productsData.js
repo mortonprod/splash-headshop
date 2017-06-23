@@ -1,236 +1,56 @@
-﻿import box from './assets/box.svg';
-import arrow from './assets/arrow.svg';
-import head from './assets/head.svg';
-import redBra from './assets/girl-254708_1280.jpg';
-import model from './assets/model-2373325_1920.jpg';
-import cleaning from './assets/averie-woodard-114289.jpg'
-import dress from './assets/tamara-bellis-256701.jpg'
-let data = []
+﻿import pic0 from './assets/girl-254708_1280.jpg';
+import pic1 from './assets/model-2373325_1920.jpg';
+import pic2 from './assets/averie-woodard-114289.jpg'
+import pic3 from './assets/tamara-bellis-256701.jpg'
+import pic4 from "./assets/yoann-boyer-285832.jpg";
+import pic5 from "./assets/kira-ikonnikova-156668.jpg";
+import pic6 from "./assets/zeny-rosalina-202966.jpg";
+import pic7 from "./assets/jan-phoenix-269396.jpg";
+import pic8 from "./assets/amos-bar-zeev-291110.jpg";
+import pic9 from "./assets/mohammad-faruque-197300.jpg";
 
-data.push({
-    name:"Shoes",
-    description:"A box",
-    pic: dress,
+let data0=[];
+
+
+data0.push({
+    title:"Underwear",
+    description:"Bra and pants set",
+    pic: pic0,
     price:"£10"
 })
 
-data.push({
-    name:"Dress",
-    description:"Green dress",
-    pic: cleaning,
-    price:"£10"
-})
-
-data.push({
-    name:"accessories",
-    description:"",
-    pic: redBra,
-    price:"£10"
-})
-
-data.push({
-    name:"blouse",
-    description:"A box",
-    pic: dress,
-    price:"£10"
-})
-
-data.push({
-    name:"arrow",
-    description:"A box",
-    pic: redBra,
-    price:"£10"
-})
-
-data.push({
-    name:"head",
-    description:"A head",
-    pic: dress,
-    price:"£10"
-})
-
-data.push({
-    name:"arrow",
-    description:"A box",
-    pic: dress,
-    price:"£10"
-})
-
-data.push({
-    name:"arrow",
-    description:"A box",
-    pic: cleaning,
-    price:"£10"
+data0.push({
+    title:"Accesories",
+    description:"Necklace",
+    pic: pic1,
+    price:"£5"
 })
 
 
-data.push({
-    name:"box",
-    description:"A box",
-    pic: dress,
-    price:"£10"
-})
+let data1=[];
 
-data.push({
-    name:"box",
-    description:"A box",
-    pic: cleaning,
-    price:"£10"
-})
 
-data.push({
-    name:"arrow",
-    description:"A box",
-    pic: redBra,
-    price:"£10"
-})
 
-data.push({
-    name:"arrow",
-    description:"A box",
-    pic: dress,
-    price:"£10"
-})
+let data2=[];
+let data3=[];
 
-data.push({
-    name:"arrow",
-    description:"A box",
-    pic: redBra,
-    price:"£10"
-})
-
-data.push({
-    name:"head",
-    description:"A head",
-    pic: dress,
-    price:"£10"
-})
-
-data.push({
-    name:"arrow",
-    description:"A box",
-    pic: dress,
-    price:"£10"
-})
-
-data.push({
-    name:"arrow",
-    description:"A box",
-    pic: cleaning,
-    price:"£10"
+data3.push({
+    title:"Dress",
+    description:"Pink with spots",
+    pic: pic3,
+    price:"£5"
 })
 
 
-data.push({
-    name:"box",
-    description:"A box",
-    pic: dress,
-    price:"£10"
-})
-
-data.push({
-    name:"box",
-    description:"A box",
-    pic: cleaning,
-    price:"£10"
-})
-
-data.push({
-    name:"arrow",
-    description:"A box",
-    pic: redBra,
-    price:"£10"
-})
-
-data.push({
-    name:"arrow",
-    description:"A box",
-    pic: dress,
-    price:"£10"
-})
-
-data.push({
-    name:"arrow",
-    description:"A box",
-    pic: redBra,
-    price:"£10"
-})
-
-data.push({
-    name:"head",
-    description:"A head",
-    pic: dress,
-    price:"£10"
-})
-
-data.push({
-    name:"arrow",
-    description:"A box",
-    pic: dress,
-    price:"£10"
-})
-
-data.push({
-    name:"arrow",
-    description:"A box",
-    pic: cleaning,
-    price:"£10"
-})
 
 
-data.push({
-    name:"box",
-    description:"A box",
-    pic: dress,
-    price:"£10"
-})
 
+//////////////////////////////////////////////////////Data
+let data = [];
 data.push({
-    name:"box",
-    description:"A box",
-    pic: cleaning,
-    price:"£10"
-})
-
-data.push({
-    name:"arrow",
-    description:"A box",
-    pic: redBra,
-    price:"£10"
-})
-
-data.push({
-    name:"arrow",
-    description:"A box",
-    pic: dress,
-    price:"£10"
-})
-
-data.push({
-    name:"arrow",
-    description:"A box",
-    pic: redBra,
-    price:"£10"
-})
-
-data.push({
-    name:"head",
-    description:"A head",
-    pic: dress,
-    price:"£10"
-})
-
-data.push({
-    name:"arrow",
-    description:"A box",
-    pic: dress,
-    price:"£10"
-})
-
-data.push({
-    name:"arrow",
-    description:"A box",
-    pic: cleaning,
+    title:"Underwear",
+    description:"Bra and pants set",
+    pic: pic0,
     price:"£10"
 })
 
@@ -239,84 +59,41 @@ data.push({
 let offers = [];
 
 offers.push({
-    name:"",
-    description:"2 for 1 dresses and selected items",
-    pic: dress,
+    title:null,
+    description:"2 for 1 on selected items",
+    pic: pic9,
     price:null
 })
 
+
 offers.push({
-    name:"",
+    title:null,
     description:"Buy 1 get 1 free",
-    pic: model,
+    pic: pic8,
     price:null
 })
 
 offers.push({
-    name:"",
-    description:"3 for 2 on something",
-    pic: redBra,
+    title:null,
+    description:"50% off shoes",
+    pic: pic7,
     price:null
 })
 
 offers.push({
-    name:"",
-    description:"2 for 1 dresses and selected items",
-    pic: cleaning,
-    price:null
+    title:"Our Basket",
+    description:"A selection of our best products",
+    pic: pic2,
+    price:"£5"
 })
 
-offers.push({
-    name:"Sale",
-    description:"2 for 1 dresses and selected items",
-    pic: dress,
-    price:null
-})
-
-offers.push({
-    name:"Sale",
-    description:"2 for 1 dresses and selected items",
-    pic: model,
-    price:null
-})
-
-offers.push({
-    name:"Sale",
-    description:"2 for 1 dresses and selected items",
-    pic: redBra,
-    price:null
-})
-
-offers.push({
-    name:"Sale",
-    description:"2 for 1 dresses and selected items",
-    pic: cleaning,
-    price:null
-})
-
-offers.push({
-    name:"Sale",
-    description:"2 for 1 dresses and selected items",
-    pic: model,
-    price:null
-})
-
-offers.push({
-    name:"Sale",
-    description:"2 for 1 dresses and selected items",
-    pic: redBra,
-    price:null
-})
-
-offers.push({
-    name:"Sale",
-    description:"2 for 1 dresses and selected items",
-    pic: cleaning,
-    price:null
-})
 
 export default function getData(){
     return {
+        data0,
+        data1,
+        data2,
+        data3,
         data:data,
         offers:offers
     }

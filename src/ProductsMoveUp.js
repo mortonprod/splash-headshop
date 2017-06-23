@@ -12,7 +12,13 @@ export default class ProductsMoveUp extends Component {
     constructor(props){
         super(props);
         this.scroll = _.debounce(this.scroll,500,{trailing:false,leading:true});
-        this.state = {num:this.getNumBoxes()}
+        let end = null;
+        if(this.getNumBoxes() > this.props.data.length){
+            end = this.props.data.length;
+        }else{
+            end = this.getNumBoxes();
+        }
+        this.state = {num:end}
     }
     scroll(event){
         let space = this.parentDiv.getBoundingClientRect().bottom - window.innerHeight;
@@ -61,7 +67,7 @@ export default class ProductsMoveUp extends Component {
                 <Product
                     key={i} 
                     src={this.props.data[i].pic}
-                    name={this.props.data[i].name}
+                    title={this.props.data[i].title}
                     description={this.props.data[i].description}
                     price={this.props.data[i].price}>
                 </Product>

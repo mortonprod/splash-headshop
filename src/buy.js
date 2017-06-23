@@ -35,17 +35,17 @@ export default class Buy extends Component {
         }
         return(
         <div className={"buy"}>
-            <img src={this.props.img} className="buy__image" alt="logo" />
+            <img src={this.props.location.state.img} className="buy__image" alt="logo" />
             <div className={"buy__info"}>
                 <img src={semi} className="buy__info__image" alt="logo" />
                 <h2>
-                    {this.props.name}
+                    {this.props.location.state.title}
                 </h2>
                 <p>
-                    {this.props.description}
+                    {this.props.location.state.description}
                 </p>
                 <h3>
-                    {this.props.price}
+                    {this.props.location.state.price}
                 </h3>
                 <button onClick = {()=>{}} className={"buy__button" }> </button>
             </div>
@@ -56,8 +56,8 @@ export default class Buy extends Component {
 }
 
 Buy.defaultProps = {
-    name:"Name Name Name",
-    description:"test description test test test test test test test test test test test test test test test test test test test test test test test test",
+    title:"test name: Name Name Name",
+    description:"test description: test test test test test test test test test test test test test test test test test test test test test test test test",
     price:"£5 + delivery £2.5",
     img:dress
 }

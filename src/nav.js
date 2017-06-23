@@ -7,6 +7,7 @@ import menu from './assets/menu.svg';
 import googleC from './assets/Google_Color.svg';
 import facebookC from './assets/Facebook_Color.svg';
 import twitterC from './assets/Twitter_Color.svg';
+import accountBox from './assets/accountBox.svg';
 
 import "./nav.css"
 
@@ -107,6 +108,11 @@ export default class Nav extends Component{
 	                                <img src={googleC} className="" alt="logo" />
 	                            </a>
 	                        </li>
+                            <li>
+                                <Link to="/account">
+                                    <img src={accountBox} className="" alt="logo" />
+                                </Link>
+                            </li>
 
 	                      </ul>
                         </article>

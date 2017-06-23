@@ -40,6 +40,7 @@
     align-content: center;
     overflow: hidden;
     margin: auto;
+    height:200px;
 }
 
 .products__box__items__button {

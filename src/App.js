@@ -22,6 +22,8 @@ import Nav from "./nav";
 
 import Eye from "./eye";
 
+import Account from "./account";
+
 
 import './App.css';
 
@@ -43,6 +45,7 @@ class App extends Component {
                 <Route path="/buy" component={Buy}/>
                 <Route path="/more" component={Chose}/>
                 <Route path="/headshop" component={Eye}/>
+                <Route path="/account" component={Account}/>
 	        </Switch>
 	    </Fade>
         <Nav threshold={900}/>
@@ -61,9 +64,9 @@ class Fade extends Component {
         return (
             <Route render={({location}) => (
                 <ReactCSSTransitionGroup
-                    transitionName="fade"
-                    transitionEnterTimeout={1000}
-                    transitionLeaveTimeout={1000}
+                    transitionName="tran"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}
                 >
                     {React.cloneElement(this.props.children, {location: location, key: location.key})}
                 </ReactCSSTransitionGroup>
@@ -71,3 +74,4 @@ class Fade extends Component {
         );
     }
 }
+//{React.cloneElement(this.props.children, {location: location, key: location.key})}

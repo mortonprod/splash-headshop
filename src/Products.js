@@ -41,6 +41,9 @@ export default class Products extends Component {
         //The number of boxes between start and stop before resize - the number it should be to get the end.
         let numNow = this.state.end -  this.state.start;
         let end = this.state.end - (numNow - this.getNumBoxes());
+        if(end > this.props.data.length){
+            end = this.props.data.length;
+        }
 
         this.setState({ 
             start:this.state.start,
@@ -55,9 +58,13 @@ export default class Products extends Component {
         let newStart = this.state.start+this.getNumBoxes();
         let newBoxes = this.state.end+this.getNumBoxes();
 
-        if(newBoxes > this.props.data.length){
+        if(newBoxes > this.props.data.length){//If we reach then end then start from the beginning
             newStart= 0;
-            newBoxes = this.getNumBoxes();
+            if(this.getNumBoxes() > this.props.data.length){//If not enough data to fill then use what we have
+                newBoxes = this.props.data.length;
+            }else{
+                newBoxes = this.getNumBoxes();
+            }
         }
 
         this.setState({ 
@@ -75,14 +82,19 @@ export default class Products extends Component {
             end:newBoxes,
             direction:"moveLeft"
         });
-        },500);
+        },600);
     }
     moveRight(){
         let newStart = this.state.start-this.getNumBoxes();
         let newBoxes = this.state.end-this.getNumBoxes();
         if(newStart < 0){
-            newStart= this.props.data.length-this.getNumBoxes() -1;
-            newBoxes = this.props.data.length - 1;
+            if(this.props.data.length < this.getNumBoxes()){
+                newStart= this.props.data.length-1;
+            }else{
+                newStart= this.props.data.length-this.getNumBoxes();
+            }
+
+            newBoxes = this.props.data.length ;
         }
 
         this.setState({ 
@@ -100,7 +112,7 @@ export default class Products extends Component {
             end:newBoxes,
             direction:"moveRight"
         });
-        },500);
+        },600);
     }
     isTouching = false;
     xS = 0;
@@ -167,7 +179,7 @@ export default class Products extends Component {
                 <Product
                     key={i} 
                     src={this.props.data[i].pic}
-                    name={this.props.data[i].name}
+                    title={this.props.data[i].title}
                     description={this.props.data[i].description}
                     price={this.props.data[i].price}>
                 </Product>
