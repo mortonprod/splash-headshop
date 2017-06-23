@@ -34,9 +34,9 @@ export default class Store extends Component {
         this.setState({translateY:scrollTop});
 
     }
-    getNumBoxes(){
-        return Math.floor(window.innerWidth/this.props.childWidth);
-    }
+    //getNumBoxes(){
+    //    return Math.floor(window.innerWidth/this.props.childWidth);
+    //}
     render(){
         let  storeTitle = null;
         if(!isMounted){

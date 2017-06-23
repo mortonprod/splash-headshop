@@ -5,6 +5,7 @@ import * as _ from "lodash";
 import Product from "./Product";
 import "./Products.css";
 export default class Products extends Component {
+    data = null;
     constructor(props){
         super(props);
         this.state = {
@@ -14,6 +15,7 @@ export default class Products extends Component {
             end:100,
             direction:""
         }
+        this.data = _.clone(this.props.data);
     }
     componentDidMount() {
 
@@ -31,10 +33,11 @@ export default class Products extends Component {
     updateWindowDimensions() {
         //The number of boxes between start and stop before resize - the number it should be to get the end.
         let numNow = this.state.end -  this.state.start;
+        //New end = old end - (difference between old and new number of boxes.)
         let end = this.state.end - (numNow - this.getNumBoxes());
-        if(end > this.props.data.length){
-            end = this.props.data.length;
-        }
+        //if(end > this.props.data.length){
+        //    end = this.props.data.length;
+        //}
 
         this.setState({ 
             start:this.state.start,
@@ -43,18 +46,20 @@ export default class Products extends Component {
         });
     }
     getNumBoxes(){
-        return Math.floor(window.innerWidth/this.props.childWidth);
+        if(Math.floor(window.innerWidth/this.props.childWidth) < this.props.data.length){
+            let fitNum = Math.floor(window.innerWidth/this.props.childWidth)
+            return fitNum;
+        }else{
+            return this.props.data.length;
+        }
+
     }
     moveLeft(){
         let newStart = this.state.start+this.getNumBoxes();
-        let newBoxes = this.state.end+this.getNumBoxes();
-
-        if(newBoxes > this.props.data.length){//If we reach then end then start from the beginning
-            newStart= 0;
-            if(this.getNumBoxes() > this.props.data.length){//If not enough data to fill then use what we have
-                newBoxes = this.props.data.length;
-            }else{
-                newBoxes = this.getNumBoxes();
+        let newEnd = this.state.end+this.getNumBoxes();
+        if(newEnd > this.data.length){//If we have reach then end then fill up array.
+            for(let i = 0; i < this.props.data.length;i++){
+                this.data.push(this.props.data[i]);
             }
         }
 
@@ -70,22 +75,21 @@ export default class Products extends Component {
             width: this.state.width, 
             height: this.state.height,
             start:newStart,
-            end:newBoxes,
+            end:newEnd,
             direction:"moveLeft"
         });
         },600);
     }
     moveRight(){
         let newStart = this.state.start-this.getNumBoxes();
-        let newBoxes = this.state.end-this.getNumBoxes();
-        if(newStart < 0){
-            if(this.props.data.length < this.getNumBoxes()){
-                newStart= this.props.data.length-1;
-            }else{
-                newStart= this.props.data.length-this.getNumBoxes();
+        let newEnd = this.state.end-this.getNumBoxes();
+        if(newStart < 0){//If we have reach then end then fill up array.
+            let length = this.props.data.length;
+            for(let i = 0; i < length;i++){
+                this.data.unshift(this.props.data[(length -1) - i]);
             }
-
-            newBoxes = this.props.data.length ;
+            newStart = newStart + length;
+            newEnd = newEnd + length;
         }
 
         this.setState({ 
@@ -100,7 +104,7 @@ export default class Products extends Component {
             width: this.state.width, 
             height: this.state.height,
             start:newStart,
-            end:newBoxes,
+            end:newEnd,
             direction:"moveRight"
         });
         },600);
@@ -157,10 +161,10 @@ export default class Products extends Component {
             items.push(
                 <Product
                     key={i} 
-                    src={this.props.data[i].pic}
-                    title={this.props.data[i].title}
-                    description={this.props.data[i].description}
-                    price={this.props.data[i].price}>
+                    src={this.data[i].pic}
+                    title={this.data[i].title}
+                    description={this.data[i].description}
+                    price={this.data[i].price}>
                 </Product>
             )
         }
