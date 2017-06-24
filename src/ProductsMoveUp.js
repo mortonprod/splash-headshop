@@ -11,7 +11,7 @@ export default class ProductsMoveUp extends Component {
     parentDiv = null;
     constructor(props){
         super(props);
-        this.scroll = _.debounce(this.scroll,500,{trailing:false,leading:true});
+        this.scroll = _.throttle(this.scroll,500,{trailing:true,leading:true});
         let end = null;
         if(this.getNumBoxes() > this.props.data.length){
             end = this.props.data.length;
@@ -32,7 +32,7 @@ export default class ProductsMoveUp extends Component {
                     }.bind(this),500*i);
 
                 }
-            }else if(space < 10 && this.props.data.length - this.state.num > 0 ) {//Only take what is left
+            }else if(space < 500 && this.props.data.length - this.state.num > 0 ) {//Only take what is left
                 let finalPictures = this.props.data.length - this.state.num;
                 for(let i = 0; i < finalPictures; i++ ){
                     setTimeout(function(){
@@ -69,7 +69,9 @@ export default class ProductsMoveUp extends Component {
                     src={this.props.data[i].pic}
                     title={this.props.data[i].title}
                     description={this.props.data[i].description}
-                    price={this.props.data[i].price}>
+                    price={this.props.data[i].price}
+                    info={this.props.data[i].info}
+                    >
                 </Product>
             )
         }

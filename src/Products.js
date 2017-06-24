@@ -164,7 +164,9 @@ export default class Products extends Component {
                     src={this.data[i].pic}
                     title={this.data[i].title}
                     description={this.data[i].description}
-                    price={this.data[i].price}>
+                    price={this.data[i].price}
+                    info={this.data[i].info}
+                    >
                 </Product>
             )
         }
@@ -173,12 +175,12 @@ export default class Products extends Component {
         }
         return (
             <article 
-            onTouchStart={(event)=> { event.persist(); event.preventDefault();  this.start(event) }}
-            onTouchMove={(event)=> { event.persist(); event.preventDefault();  this.move(event) }}
-            onTouchEnd={(event)=> { event.persist(); event.preventDefault();  this.end(event) }}
-            onMouseDown={(event)=> { event.persist(); event.preventDefault();  this.start(event) }}
-            onMouseMove={(event)=> { event.persist(); event.preventDefault();  this.move(event) }}
-            onMouseUp={(event)=> { event.persist(); event.preventDefault();  this.end(event) }}
+            onTouchStart={(event)=> { event.persist(); this.start(event) }}
+            onTouchMove={(event)=> { event.persist();   this.move(event) }}
+            onTouchEnd={(event)=> { event.persist();   this.end(event) }}
+            onMouseDown={(event)=> { event.persist();  this.start(event) }}
+            onMouseMove={(event)=> { event.persist();   this.move(event) }}
+            onMouseUp={(event)=> { event.persist();  this.end(event) }}
              className="products">
                 <div className="products__box"> 
                     <header>

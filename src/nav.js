@@ -86,7 +86,6 @@ export default class Nav extends Component{
 	                      <ul className={"nav__box__links__routes"}>
 	                        <li><Link to="/">Home</Link></li>
 	                        <li><Link to="/about">About</Link></li>
-	                        <li><Link to="/buy">Buy</Link></li>
 	                        <li><Link to="/more">More</Link></li>
 	                      </ul>
                       </article>

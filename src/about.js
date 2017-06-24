@@ -9,7 +9,7 @@ let isMounted = false;
 export default class About extends Component {
     constructor(){
         super();
-        //this.scroll = _.throttle(this.scroll.bind(this),this.time/this.steps);
+        //this.scroll = _.throttle(this.scroll.bind(this),100);
         this.state = {scale:[0,0],translateY:[0,0],top:[0,0]}
     }
     el = [];
@@ -31,6 +31,9 @@ export default class About extends Component {
         this.scaleChunk = 1/this.props.steps; 
         window.addEventListener('scroll', this.scroll.bind(this));
     }
+    down = 0;
+    up=0;
+    total=0;
     scroll(event){
         let isMovingDown = null;
         let scrollTop = event.srcElement.body.scrollTop;
@@ -44,18 +47,22 @@ export default class About extends Component {
         let scale = [this.state.scale[0],this.state.scale[1]];
         let translateY = [this.state.translateY[0],this.state.translateY[1]];
         let top = [this.state.top[0],this.state.top[1]];
+        this.total++;
         if(this.scrollTop !== null){
             let moveNum = 1;
             let height = window.innerHeight/2;
             for(let i=0; i < moveNum; i++){
-                let bottom = this.el[i].getBoundingClientRect().bottom;
+                let topDiv = this.el[i].getBoundingClientRect().top;
+                if(topDiv < 0 && moveNum < 2){
+                    moveNum++;
+                }
 	            let isAdd = null;
-	            if(bottom > height){///If object is at top half of screen then shrink agains 
+	            if(topDiv > height){///If object is at top half of screen then shrink agains 
 	                isAdd = true; 
-                    console.log("bottom(" + bottom + ") > height(" + height + "): true ");
+                    console.log( "i: " + i  + "top(" + topDiv + ") > height(" + height + "): true ");
 	            }else{
-	                isAdd = true;
-                    console.log("bottom(" + bottom + ") > height(" + height + "): false");
+	                isAdd = false;
+                    console.log("i: " + i  + "top(" + topDiv + ") > height(" + height + "): false");
 
 	            }
 	            if(isMovingDown){//If direction of scroll changes then skrink rather than expand or vis vera.
@@ -74,15 +81,19 @@ export default class About extends Component {
 	            if(isMovingDown){//Change direction of translate if scroll direction changes.
 	             //   translateY[0] = this.state.translateY + this.heightChunk;
 	             //   translateY[1] = this.state.translateY + this.heightChunk;
-
+                      this.down++
                       top[i] = this.state.top[i] - this.heightChunk;
 	            }else{
 	             //   translateY[0] = this.state.translateY - this.heightChunk;
 	              //  translateY[1] = this.state.translateY - this.heightChunk;
                       top[i] = this.state.top[i] + this.heightChunk;
+                      this.up++;
 	            }
             }
+        }else{
+            console.log("Scroll is null")
         }
+        console.log("Scroll up " + this.up + "  down " + this.down + " total: " + this.total)
         this.setState({scale:scale, translateY:translateY, top:top});
         this.scrollTop = scrollTop;
     }
@@ -103,7 +114,15 @@ export default class About extends Component {
         }
         return (
             <section className={"about"}>
-                {title}
+                <header>
+                    {title}
+                </header>
+                <p>
+                    A small boutique store based in Helensburgh. 
+                </p>
+                <p>
+                   We live by a few simple rules.... 
+                </p>
                 <article
                 ref={(el)=>{this.el[0]= el}} 
 		        style={{

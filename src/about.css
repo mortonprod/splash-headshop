@@ -13,7 +13,7 @@
     display:flex;
     direction:columns;
     justify-content:center;
-    width:90%;
+    width:100vw;
     margin:auto;
 }
 
@@ -23,10 +23,17 @@
 
 .about__entry__info {
     height: 45%;
-    width:40%;
+    width:100%;
     font-family: FjallaOne-Regular;
     font-size: 40px;
     color: rgba(0,31,245,0.56);
+}
+
+.about p {
+    text-align:center;
+    width:100%;
+    font-size: 5vw;
+
 }
 
 .about__entry__info > h2 {

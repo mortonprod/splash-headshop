@@ -107,6 +107,7 @@ header{
     color: white;
     display: inline;
     height: 30px;
+    margin-top:20px;
 }
 
 
@@ -132,6 +133,7 @@ header{
     font-family: 'Mogra', cursive;
     color: white;
 }
+
 .nav__box__links__social{
     padding:0;
 }

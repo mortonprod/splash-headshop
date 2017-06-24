@@ -15,7 +15,8 @@ export default class Product extends Component {
                         title: this.props.title,
                         description:this.props.description,
                         img:this.props.src,
-                        price:this.props.price 
+                        price:this.props.price,
+                        info:this.props.info 
                     }
                 }} 
                 className={"product__link"} >
